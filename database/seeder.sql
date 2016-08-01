@@ -1,34 +1,4 @@
-DROP DATABASE IF EXISTS the_league_db;
-
-CREATE DATABASE the_league_db;
-
 USE the_league_db;
-
-CREATE TABLE teams (
-  id      INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  name    VARCHAR(100) NOT NULL,
-  stadium VARCHAR(100) NOT NULL,
-  league  ENUM ('national', 'american'),
-  PRIMARY KEY (id),
-  FOREIGN KEY (player_id) REFERENCES players (id)
-);
-
-CREATE TABLE players (
-  id       INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  team_id  INT UNSIGNED NOT NULL,
-  name     VARCHAR(255) NOT NULL,
-  position VARCHAR(50),
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE games (
-  visitor_team_id   INT UNSIGNED NOT NULL,
-  local_team_id     INT UNSIGNED NOT NULL,
-  visitor_team_runs INT UNSIGNED NOT NULL,
-  local_team_runs   INT UNSIGNED NOT NULL,
-  game_date         DATETIME     NOT NULL,
-  PRIMARY KEY (visitor_team_id, local_team_id, game_date)
-);
 
 INSERT INTO teams (name, stadium, league)
 VALUES ('minor leauge team', 'NA', 'national'),
@@ -1174,4 +1144,3 @@ VALUES (26, 3, 2, 2, '2016-04-01'), (26, 10, 4, 9, '2016-04-01'),
   (22, 28, 2, 1, '2016-07-27'), (2, 17, 6, 0, '2016-07-27'),
   (3, 18, 5, 0, '2016-07-27'), (20, 12, 0, 4, '2016-07-27'),
   (16, 14, 0, 0, '2016-07-27');
-
