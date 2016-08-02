@@ -7,6 +7,7 @@ function pageController()
         // Filter teams based on league, only select the team's identifier
         // and its name
         $league = Input::get('league');
+
         $teams = "SELECT name AS team_name, id 
                   FROM teams
                   WHERE league = '$league'";
@@ -18,8 +19,8 @@ function pageController()
         // $teams = ...
     }
     // The player's identifier should be in the query string
-    $teamId = Input::get('player_id');
-    $sql = '';
+    $playerId = Input::get('player_id');
+    $sql = "SELECT p.name, p.position, t.league, t.name FROM players AS p JOIN teams AS t ON t.id = p.team_id WHERE p.id = $playerId";
     var_dump($sql);
     return [
         'title' => 'Chris Young',

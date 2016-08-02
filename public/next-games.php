@@ -2,15 +2,20 @@
 require __DIR__ . '/../src/Input.php';
 function pageController()
 {
+    
+    $league = Input::get('league');
+    $team = Input::get('team');
     // Write the SELECT to retrieve all upcoming games
-    $sql = '';
+    $sql = "SELECT * FROM games as g JOIN teams AS t ON t.id - g.local_team_id JOIN teams AS v ON v.id = g.visitor_team_id WHERE game_date > '2016-07-01 00:00:00'";
     if (Input::has('league')) {
         // Concatenate the WHERE part to retrieve only the games for either the
         // National league or the American league
+        $sql .= " AND t.league ='$league'";
     }
     if (Input::has('team')) {
         // Concatenate the WHERE part to retrieve only the games for teams with
-        // a name similar to the one provided by the user.
+        // a name similar to the one provided by the user.        
+        $sql .= " AND t.name LIKE '%$team%' OR v.name LIKE '%$team%'";
     }
     // Copy the generated query and verify that it retrieves the correct values
     // in SQL Pro
